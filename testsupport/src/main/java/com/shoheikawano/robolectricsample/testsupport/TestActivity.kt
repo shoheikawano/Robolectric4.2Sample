@@ -1,4 +1,4 @@
-package com.shoheikawano.robolectricsample
+package com.shoheikawano.robolectricsample.testsupport
 
 import androidx.appcompat.app.AppCompatActivity
 
