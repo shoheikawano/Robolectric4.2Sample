@@ -6,25 +6,26 @@ android {
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
 }
 
 dependencies {
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.2'
+
+    /**
+     * configuration: 'default' is specified due to the compilation error below:
+     * Unable to resolve dependency for ':testsupport@debug/compileClasspath': Could not resolve project :app.
+     * Unable to resolve dependency for ':testsupport@debugAndroidTest/compileClasspath': Could not resolve project :app.
+     * Unable to resolve dependency for ':testsupport@debugUnitTest/compileClasspath': Could not resolve project :app.
+     * Unable to resolve dependency for ':testsupport@release/compileClasspath': Could not resolve project :app.
+     * Unable to resolve dependency for ':testsupport@releaseUnitTest/compileClasspath': Could not resolve project :app.
+     *
+     * Ref: https://stackoverflow.com/a/47768140/5449688
+     */
+    implementation project(path:':app', configuration: 'default')
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
